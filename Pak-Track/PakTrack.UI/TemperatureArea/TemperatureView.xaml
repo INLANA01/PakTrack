@@ -1,0 +1,123 @@
+﻿<UserControl x:Class="PakTrack.UI.TemperatureArea.TemperatureView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:converters="clr-namespace:PakTrack.UI.Converters"
+             xmlns:oxy="http://oxyplot.org/wpf"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <!-- Loaded Windows Event -->
+    <i:Interaction.Triggers>
+        <i:EventTrigger>
+            <ei:CallMethodAction MethodName="Initialize" TargetObject="{Binding Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!-- /End loaded windows -->
+
+    <UserControl.Resources>
+        <converters:TimestampConverter x:Key="TimestampConverter" />
+        <converters:RowToIndexConverter x:Key="RowToIndexConverter" />
+        <converters:TemperatureUnitConverter x:Key="TemperatureUnitConverter" />
+        <!--Style -->
+        <Style x:Key="Centering" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="10, 5, 10,5">
+
+        <!-- Row definition -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="328" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!-- /End row definition -->
+
+        <!-- /Title Texblock -->
+        <StackPanel Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                           Grid.Column="0" FontSize="18" FontWeight="Bold" />
+
+                <Button
+                    Command="{Binding DeleteAllEventsCommand}"
+                    HorizontalAlignment="Right"
+                    Content="Delete"
+                    Style="{StaticResource PakTrackAccentedSquareButtonStyle}"
+                    Grid.Column="1" Width="80" />
+                <Button
+                    Command="{Binding TemperatureToCsvCommand}"
+                    HorizontalAlignment="Right"
+                    CommandParameter="{Binding Id}" Content="CSV"
+                    Style="{StaticResource PakTrackAccentedSquareButtonStyle}"
+                    Grid.Column="2" Width="80" />
+
+            </Grid>
+
+        </StackPanel>
+        
+        <!-- /end title -->
+
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" Padding="0" Margin="0,1,0,5">
+            <oxy:PlotView Model="{Binding TemperaturePlotModel}" />
+        </Border>
+
+        <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1">
+            <DataGrid ItemsSource="{Binding TemperatureData}" AutoGenerateColumns="False" IsReadOnly="True"
+                      GridLinesVisibility="All" ColumnHeaderStyle="{StaticResource PakTrackDataGridHeaderStyle}">
+
+                <DataGrid.Columns>
+
+                    <!-- Row Number -->
+                    <DataGridTextColumn Header="No.">
+                        <DataGridTextColumn.Binding>
+                            <MultiBinding Converter="{StaticResource RowToIndexConverter}">
+                                <Binding />
+                                <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}" />
+                            </MultiBinding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                    <!-- /End row number -->
+
+                    <!-- Timestamp -->
+                    <DataGridTextColumn Header="Time"
+                                        Binding="{Binding Timestamp, Converter={StaticResource TimestampConverter}}"
+                                        Width="170" ElementStyle="{StaticResource Centering}" />
+                    <!-- /End timestamp -->
+
+                    <!-- Temperature value F -->
+                    <DataGridTextColumn Header="Temperature (°F)" Binding="{Binding Value}" Width="*" />
+                    <!-- /End temperature value -->
+                    <!-- Temperature value C-->
+                    <DataGridTextColumn Header="Temperature (°C)" Binding="{Binding Value, Converter={StaticResource TemperatureUnitConverter}}" Width="*" />
+                    <!-- /End temperature value -->
+
+
+                    <!-- Analysis -->
+                    <DataGridTemplateColumn Header="Analysis" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="260" Margin="5,0,0,0" HorizontalAlignment="Left">
+                                    <Button
+                                        Command="{Binding DataContext.DeleteTemperatureCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding Id}" Content="Delete Event"
+                                        Style="{StaticResource PakTrackAccentedSquareButtonStyle}"
+                                        Grid.Row="0" Grid.Column="0" Width="80" Margin="1" />
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!-- /End analysis -->
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,258 @@
+﻿<UserControl x:Class="PakTrack.UI.ShockArea.ShockView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:converters="clr-namespace:PakTrack.UI.Converters"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    
+    <!-- Loaded Windows Event -->
+    <i:Interaction.Triggers>
+        <i:EventTrigger>
+            <ei:CallMethodAction MethodName="Initialize" TargetObject="{Binding Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!-- /End loaded windows -->
+
+    <UserControl.Resources>
+        <converters:TimestampConverter x:Key="TimestampConverter" />
+        <converters:RowToIndexConverter x:Key="RowToIndexConverter" />
+        <converters:DropHeightConverter x:Key="DropHeightConverter"/>
+        <converters:ShockOrientationConverter x:Key="ShockOrientationConverter"/>
+        <!--Style -->
+        <Style x:Key="Centering" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45" />
+<!--            <RowDefinition Height="450" />-->
+            <RowDefinition Height="*" />
+           
+        </Grid.RowDefinitions>
+        
+        <!-- /Title Texblock -->
+        <StackPanel Grid.Row="0" Margin="2">
+            <Grid Margin="2">
+                <!-- Row and Column definition-->
+                
+                <Grid.ColumnDefinitions> 
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                           FontSize="18" FontWeight="Bold"  Grid.Row="0" Grid.Column="0" />
+                <Button
+                    Command="{Binding ShockDataToCsvCommand}"
+                    Content="Delete"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource PakTrackAccentedSquareButtonStyle}"
+                    Width="80" Grid.Row="0" Grid.Column="1" Margin="1"/>
+                <Button
+                    Command="{Binding ShockDataToCsvCommand}"
+                    Content="CSV"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource PakTrackAccentedSquareButtonStyle}"
+                    Width="80" Grid.Row="0" Grid.Column="2" Margin="1"/>
+            </Grid>
+           
+        </StackPanel>
+        <!-- /end title -->
+<!--        -->
+<!--        <wpf:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Bottom" Grid.Row="1">-->
+<!--            <wpf:CartesianChart.AxisX>-->
+<!--                <wpf:Axis Title="Browser" -->
+<!--                          Labels="{Binding Labels}" -->
+<!--                          Separator="{x:Static wpf:DefaultAxes.CleanSeparator}" />-->
+<!--            </wpf:CartesianChart.AxisX>-->
+<!--            <wpf:CartesianChart.AxisY>-->
+<!--                <wpf:Axis Title="Usage" LabelFormatter="{Binding Formatter}"></wpf:Axis>-->
+<!--            </wpf:CartesianChart.AxisY>-->
+<!--        </wpf:CartesianChart>-->
+        
+        <xctk:BusyIndicator IsBusy="{Binding IsBusy}" BusyContent="Loading..." Grid.Row="2">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="45" />
+
+                </Grid.RowDefinitions>
+                
+                <DataGrid Grid.Row="0" IsReadOnly="True" AutoGenerateColumns="False" GridLinesVisibility="All" ItemsSource="{Binding ShockData}"
+                      ColumnHeaderStyle="{StaticResource PakTrackDataGridHeaderStyle}">
+                    <DataGrid.Columns>
+
+                        <!-- Row Number -->
+                        <DataGridTextColumn Header="No.">
+                            <DataGridTextColumn.Binding>
+                                <MultiBinding Converter="{StaticResource RowToIndexConverter}">
+                                    <Binding />
+                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}" />
+                                </MultiBinding>
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
+                        <!-- /End row number -->
+
+                        <!-- Timestamp -->
+                        <DataGridTextColumn Header="Time"
+                                        Binding="{Binding Timestamp, Converter={StaticResource TimestampConverter}}"
+                                        Width="200" ElementStyle="{StaticResource Centering}"/>
+                        <!-- /End timestamp -->
+
+                        <!-- Max-G-RMS -->
+                        <DataGridTemplateColumn Header="Max-G Value (G)" Width="165">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Left" Margin="5,0">
+                                        <!-- Column and row definitin -->
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <!-- /End column and row definition -->
+
+                                        <!-- Identifiers TextBlocks -->
+                                        <Border CornerRadius="3" Grid.Column="0" Grid.Row="0" Background="#F0AD4E"
+                                            Style="{StaticResource ThreeAxisBorder}">
+                                            <TextBlock Text="X:" Style="{StaticResource ThreeAxisLabel}" />
+                                        </Border>
+
+                                        <Border CornerRadius="3" Grid.Column="0" Grid.Row="1" Background="#F0AD4E"
+                                            Style="{StaticResource ThreeAxisBorder}">
+                                            <TextBlock Text="Y:" Style="{StaticResource ThreeAxisLabel}" />
+                                        </Border>
+
+                                        <Border CornerRadius="3" Grid.Column="0" Grid.Row="2" Background="#F0AD4E"
+                                            Style="{StaticResource ThreeAxisBorder}">
+                                            <TextBlock Text="Z:" Style="{StaticResource ThreeAxisLabel}" />
+                                        </Border>
+                                        <!-- /End Identifiers TextBlocks -->
+
+                                        <!-- Value TextBlocks -->
+                                        <TextBlock Text="{Binding MaximumX.Value, StringFormat=N4}" Grid.Column="1" Grid.Row="0"
+                                               Style="{StaticResource ThreeAxisInfo}" />
+                                        <TextBlock Text="{Binding MaximumY.Value, StringFormat=N4}" Grid.Column="1" Grid.Row="1"
+                                               Style="{StaticResource ThreeAxisInfo}" />
+                                        <TextBlock Text="{Binding MaximumZ.Value, StringFormat=N4}" Grid.Column="1" Grid.Row="2"
+                                               Style="{StaticResource ThreeAxisInfo}" />
+                                        <!-- /End value TextBlocks -->
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!-- /End Max-G-RMS -->
+
+                        <!-- Orientation -->
+                        <DataGridTextColumn Header="Orientation" Binding="{Binding Orientation, Converter={StaticResource ShockOrientationConverter}}"/>
+                        <!-- /Orientation -->
+
+                        <!-- DropHeight -->
+                        <DataGridTextColumn Header="Drop-Height (m)" ElementStyle="{StaticResource Centering}" Width="140">
+                            <DataGridTextColumn.Binding>
+                                <MultiBinding Converter="{StaticResource DropHeightConverter}">
+                                    <Binding Path="DropHeight"/>
+                                    <Binding Path="IsInstantaneous"/>
+                                </MultiBinding>
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
+                        <!-- /End Drop-Height -->
+
+                        <!-- Analysis -->
+                        <DataGridTemplateColumn Header="Analysis" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Width="260" Margin="5,0,0,0" HorizontalAlignment="Left">
+                                        <!-- Row and Column definition-->
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <!-- /End row and column definition -->
+
+                                        <Button
+                                        Command="{Binding DataContext.DisplayTimeGraphCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding Id}"
+                                        Style="{StaticResource PakTrackAccentedSquareButtonStyle}"
+                                        Content="Time Graph" Width="80" Grid.Row="0" Grid.Column="0" Margin="1"/>
+                                        <Button
+                                        Command="{Binding DataContext.DisplaySRSGraphCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding Id}" Content="SRS Graph"
+                                        Style="{StaticResource PakTrackAccentedSquareButtonStyle}"
+                                        Grid.Row="0" Grid.Column="1" Width="80"  Margin="1"/>
+
+                                        <Button
+                                        Command="{Binding DataContext.DeleteShockEventCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding Id}" Content="Delete Event"
+                                        Style="{StaticResource PakTrackAccentedSquareButtonStyle}"
+                                        Grid.Row="0" Grid.Column="2" Width="80" Margin="1" />
+                                        <Button
+                                        Command="{Binding DataContext.TimeCsvEventCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding Id}" Content="Time-CSV"
+                                        Style="{StaticResource PakTrackAccentedSquareButtonStyle}"
+                                        Grid.Row="1" Grid.Column="0" Width="80" Margin="1" />
+                                        <Button
+                                        Command="{Binding DataContext.SrsCsvEventCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding Id}" Content="SRS-CSV"
+                                        Style="{StaticResource PakTrackAccentedSquareButtonStyle}"
+                                        Grid.Row="1" Grid.Column="1" Width="80" Margin="1" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!-- /End analysis -->
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="1"
+                            HorizontalAlignment="Center">
+                    <Button Command="{Binding FirstCommand}" Height="23" HorizontalAlignment="Left"  
+                            Name="btnFirst" VerticalAlignment="Bottom" 
+                            Width="40" Content="&lt;&lt;" 
+                            Opacity="0.75"/>
+
+                    <Button Command="{Binding PreviousCommand}" Height="23"  VerticalAlignment="Bottom" 
+                            Name="btnPrev" Width="40" 
+                            Opacity="0.75" Content="&lt;"/>
+
+                    <Label x:Name="lblpageInformation" Content="{Binding PagingLabel}"
+                           HorizontalContentAlignment="Center" 
+                           HorizontalAlignment="Left" Height="30" 
+                           Width="100" VerticalContentAlignment="Center" 
+                           VerticalAlignment="Bottom"/>
+
+                    <Button Command="{Binding NextCommand}" Height="23" HorizontalAlignment="Right" 
+                            Name="btnNext" VerticalAlignment="Bottom" 
+                            Width="40" Content="&gt;" 
+                            Opacity="0.75"/>
+
+                    <Button Command="{Binding LastCommand}" Height="23" HorizontalAlignment="Right"  
+                            VerticalAlignment="Bottom" Width="40" 
+                            Name="btnLast" 
+                            Opacity="0.75" Content="&gt;&gt;"/>
+
+
+                </StackPanel>
+            </Grid>
+                
+           
+        </xctk:BusyIndicator>
+
+        
+    </Grid>
+</UserControl>

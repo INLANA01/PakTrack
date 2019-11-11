@@ -1,0 +1,28 @@
+Application required to run this solution: visual studio 15.: https://visualstudio.microsoft.com/vs/older-downloads/
+
+PakTrackConstant.cs
+added String MenuOptionShockProbabilityReport for menu option of shock histogram
+
+BootStraper.cs
+added Container.RegisterTypeForNavigation<ShockProbabilityReportView>(PakTrackConstant.MenuOptionShockProbabilityReport); for shock histogram
+
+ShellViewModel.cs
+added  Container.RegisterTypeForNavigation<ShockProbabilityReportView>(PakTrackConstant.MenuOptionShockProbabilityReport);
+added  url == PakTrackConstant.MenuOptionShockProbabilityReport
+
+
+VibrationCOnsolidateReportViewModel.cs
+added
+var report50Percent = GenerateCustomConsolidatedReport2(50, reportId);
+report50Percent.Id = reportId;
+var report95Percent = GenerateCustomConsolidatedReport2(95, reportId);
+var report90Percent = GenerateCustomConsolidatedReport2(90, reportId);
+
+private VibrationReport GenerateCustomConsolidatedReport2(int dataPercentage, ObjectId reportId) for correct 50-90-95 percent report
+
+UI Files: PakTrack.UI 
+for in individual modules. Most of the changes are related to UI. and are in this module.
+
+Data Structure: PakTrack.Models 
+The data structure related changes are in PakTrack.Models.
+

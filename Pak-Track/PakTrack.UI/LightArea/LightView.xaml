@@ -1,0 +1,168 @@
+﻿<UserControl x:Class="PakTrack.UI.LightArea.LightView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:converter="clr-namespace:PakTrack.UI.Converters"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:oxy="http://oxyplot.org/wpf"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <!-- Loaded Windows Event -->
+    <i:Interaction.Triggers>
+        <i:EventTrigger>
+            <ei:CallMethodAction MethodName="Initialize" TargetObject="{Binding Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!-- /End loaded windows -->
+
+    <UserControl.Resources>
+        <converter:TimestampConverter x:Key="TimestampConverter" />
+        <converter:RowToIndexConverter x:Key="RowToIndexConverter" />
+        <!--Style -->
+        <Style x:Key="Centering" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </UserControl.Resources>
+
+
+    <Grid Margin="10, 5, 10, 5">
+        
+        <!-- Row definition -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="328" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!-- /End row definition -->
+        
+        <!-- /Title Texblock -->
+        <StackPanel Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                           Grid.Column="0" FontSize="18" FontWeight="Bold" />
+
+                <Button
+                    Command="{Binding DeleteAllLisghtEventSCommand}"
+                    HorizontalAlignment="Right"
+                    Content="Delete"
+                    Style="{StaticResource PakTrackAccentedSquareButtonStyle}"
+                    Grid.Column="1" Width="80" />
+                
+                <Button
+                    Command="{Binding LightToCsvCommand}"
+                    HorizontalAlignment="Right"
+                    Content="CSV"
+                    Style="{StaticResource PakTrackAccentedSquareButtonStyle}"
+                    Grid.Column="2" Width="80" />
+
+            </Grid>
+
+        </StackPanel>
+        <!-- /end title -->
+
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" Margin="0,1,0,5">
+            <oxy:PlotView Model="{Binding LightPlotModel}" />
+        </Border>
+        
+        <DataGrid Grid.Row="2" ItemsSource="{Binding LightData}" AutoGenerateColumns="False" IsReadOnly="True"
+                  GridLinesVisibility="All" ColumnHeaderStyle="{StaticResource PakTrackDataGridHeaderStyle}">
+            
+            <DataGrid.Columns>
+                
+                <!-- Row Number -->
+                <DataGridTextColumn Header="No.">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding Converter="{StaticResource RowToIndexConverter}">
+                            <Binding />
+                            <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}" />
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <!-- /End row number -->
+
+                <!-- Timestamp -->
+                <DataGridTextColumn Header="Time"
+                                    Binding="{Binding Timestamp, Converter={StaticResource TimestampConverter}}"
+                                    Width="170" ElementStyle="{StaticResource Centering}"/>
+                <!-- /End timestamp -->
+                
+                <!-- RGB -->
+                <DataGridTemplateColumn Header="RGB" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Left" Margin="3,0">
+                                <!-- Row and Column definition -->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <!-- /End row and column definition -->
+
+                                <!-- Identifiers TextBlocks -->
+                                <Border CornerRadius="3" Grid.Column="0" Grid.Row="0" Background="Red"
+                                        Style="{StaticResource ThreeAxisBorder}">
+                                    <TextBlock Text="R:" Style="{StaticResource ThreeAxisLabel}" />
+                                </Border>
+
+                                <Border CornerRadius="3" Grid.Column="0" Grid.Row="1" Background="Green"
+                                        Style="{StaticResource ThreeAxisBorder}">
+                                    <TextBlock Text="G:" Style="{StaticResource ThreeAxisLabel}" />
+                                </Border>
+
+                                <Border CornerRadius="3" Grid.Column="0" Grid.Row="2" Background="DodgerBlue"
+                                        Style="{StaticResource ThreeAxisBorder}">
+                                    <TextBlock Text="B:" Style="{StaticResource ThreeAxisLabel}" />
+                                </Border>
+                                <!-- /End Identifiers TextBlocks -->
+                                <!-- Red - Green - Blue Information -->
+                                <TextBlock Text="{Binding Value.R}" Grid.Row="0" Grid.Column="1" Style="{StaticResource ThreeAxisInfo}" />
+                                <TextBlock Text="{Binding Value.G}" Grid.Row="1" Grid.Column="1" Style="{StaticResource ThreeAxisInfo}" />
+                                <TextBlock Text="{Binding Value.B}" Grid.Row="2" Grid.Column="1" Style="{StaticResource ThreeAxisInfo}" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!-- /End RGB -->
+                
+
+                <!-- ClearLight -->
+                <DataGridTextColumn Header="Clear Light (Lux)" Binding="{Binding Value.ClearLight}" Width="100"
+                                    ElementStyle="{StaticResource Centering}" />
+                <!-- /End clearlight -->
+
+                <!-- Illuminance -->
+                <DataGridTextColumn Header="Illuminance (Lux)" Binding="{Binding Value.Illuminance}" Width="*"
+                                     />
+                <!-- /End Illuminance -->
+
+                <!-- Analysis -->
+                <DataGridTemplateColumn Header="Analysis" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid Width="260" Margin="5,0,0,0" HorizontalAlignment="Left">
+                                <Button
+                                    Command="{Binding DataContext.DeleteLightCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                    CommandParameter="{Binding Id}" Content="Delete Event"
+                                    Style="{StaticResource PakTrackAccentedSquareButtonStyle}"
+                                    Grid.Row="0" Grid.Column="0" Width="80" Margin="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!-- /End analysis -->
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

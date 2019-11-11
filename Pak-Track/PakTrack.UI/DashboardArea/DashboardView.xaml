@@ -1,0 +1,156 @@
+﻿<UserControl x:Class="PakTrack.UI.DashboardArea.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"           
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="800" Height="600" Width="870"
+             >
+    <Grid>
+        <GroupBox x:Name="DefaultCongif" Header="{Binding DashboardHeader}" HorizontalAlignment="Left" Margin="25,100,0,0" VerticalAlignment="Top">
+            <Grid>
+                <GroupBox x:Name="TempConfig" Header="Temperature" HorizontalAlignment="Left" Margin="0,1,0,0" VerticalAlignment="Top" Height="120" Width="400">
+                    <Grid>
+                        <Label Content="Threshold"  Width="65" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="65,0,0,0" Width="60" 
+                                    Content="{Binding  TemperatureThreshold}" VerticalAlignment="Top" />
+                        
+                        
+                        <Label Content="Events"  Width="65" Margin="0,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+                        <TextBlock  HorizontalAlignment="Left" Margin="65,30,0,0" TextWrapping="Wrap" Width="40" 
+                                    Text="{Binding TemperatureEvents}" VerticalAlignment="Top" />
+
+                        <Label Content="Start Time"  Width="65" Margin="130,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="200,0,0,0" Width="130" 
+                                Content="{Binding TemperatureStartTime }" VerticalAlignment="Top" />
+
+                        <Label Content="End Time"  Width="65" Margin="130,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="200,25,0,0" Width="130" 
+                                Content="{Binding  TemperatureEndTime}" VerticalAlignment="Top" />
+
+                    </Grid>
+                </GroupBox>
+                <GroupBox x:Name="HumidityConfig" Header="Humidity" HorizontalAlignment="Left" Margin="404,1,0,0" VerticalAlignment="Top" Height="120" Width="400">
+                    <Grid>
+                        <Label Content="Threshold"  Width="65" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="65,0,0,0" Width="60" 
+                                Content="{Binding  HumidityThreshold}" VerticalAlignment="Top" />
+                        
+                        <Label Content="Events"  Width="65" Margin="0,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+                        <TextBlock  HorizontalAlignment="Left" Margin="65,30,0,0" TextWrapping="Wrap" Width="40" 
+                                    Text="{Binding HumidityEvents}" VerticalAlignment="Top" />
+
+                        <Label Content="Start Time"  Width="65" Margin="130,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="200,0,0,0" Width="130" 
+                                Content="{Binding HumidityStartTime }" VerticalAlignment="Top" />
+
+                        <Label Content="End Time"  Width="65" Margin="130,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="200,25,0,0" Width="130" 
+                                Content="{Binding  HumidityEndTime}" VerticalAlignment="Top" />
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox x:Name="VibrationConfig" Header="Vibration" HorizontalAlignment="Left" Margin="0,121,0,0" VerticalAlignment="Top" Height="120" Width="400">
+                    <Grid>
+                        <Label Content="Threshold"  Width="65" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="65,0,0,0" Width="60" 
+                                Content="{Binding VibrationThreshold }" VerticalAlignment="Top" />
+                        
+                        <Label Content="Events"  Width="65" Margin="0,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+                        <TextBlock  HorizontalAlignment="Left" Margin="65,30,0,0" TextWrapping="Wrap" Width="40" 
+                                    Text="{Binding VibrationEvents}" VerticalAlignment="Top" />
+
+                        <Label Content="Start Time"  Width="65" Margin="130,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="200,0,0,0" Width="130" 
+                                Content="{Binding VibrationStartTime }" VerticalAlignment="Top" />
+
+                        <Label Content="End Time"  Width="65" Margin="130,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="200,25,0,0" Width="130" 
+                                Content="{Binding VibrationEndTime }" VerticalAlignment="Top" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox x:Name="ShockConfig" Header="Shock" HorizontalAlignment="Left" Margin="404,121,0,0" VerticalAlignment="Top" Height="120" Width="400">
+                    <Grid>
+                        <Label Content="Threshold"  Width="65" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="65,0,0,0" Width="60" 
+                                Content="{Binding ShockThreshold }" VerticalAlignment="Top" />
+                        
+                        <Label Content="Events"  Width="65" Margin="0,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+                        <TextBlock  HorizontalAlignment="Left" Margin="65,30,0,0" TextWrapping="Wrap" Width="40" 
+                                    Text="{Binding ShockEvents}" VerticalAlignment="Top" />
+
+                        <Label Content="Start Time"  Width="65" Margin="130,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="200,0,0,0" Width="130" 
+                                Content="{Binding ShockStartTime }" VerticalAlignment="Top" />
+
+                        <Label Content="End Time"  Width="65" Margin="130,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="200,25,0,0" Width="130" 
+                                Content="{Binding ShockEndTime }" VerticalAlignment="Top" />
+
+
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox x:Name="PressureConfig" Header="Pressure" HorizontalAlignment="Left" Margin="0,242,0,0" VerticalAlignment="Top" Height="120" Width="400">
+                    <Grid>
+                        <Label Content="Threshold"  Width="65" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="65,0,0,0" Width="60" 
+                                Content="{Binding  PressureThreshold}" VerticalAlignment="Top" />
+                        
+                        <Label Content="Events"  Width="65" Margin="0,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+                        <TextBlock  HorizontalAlignment="Left" Margin="65,30,0,0" TextWrapping="Wrap" Width="40" 
+                                    Text="{Binding PressureEvents}" VerticalAlignment="Top" />
+
+                        <Label Content="Start Time"  Width="65" Margin="130,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="200,0,0,0" Width="130" 
+                                Content="{Binding PressureStartTime }" VerticalAlignment="Top" />
+
+                        <Label Content="End Time"  Width="65" Margin="130,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="200,25,0,0" Width="130" 
+                                Content="{Binding  PressureEndTime}" VerticalAlignment="Top" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox x:Name="LightConfig" Header="Light" HorizontalAlignment="Left" Margin="404,242,0,0" VerticalAlignment="Top" Height="120" Width="400">
+                    <Grid>
+                        <Label Content="Threshold"  Width="65" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="65,0,0,0" Width="60" 
+                                Content="{Binding LightThreshold }" VerticalAlignment="Top" />
+                        <Label Content="Events"  Width="65" Margin="0,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+                        <TextBlock  HorizontalAlignment="Left" Margin="65,30,0,0" TextWrapping="Wrap" Width="40" 
+                                    Text="{Binding LightEvents}" VerticalAlignment="Top" />
+
+                        <Label Content="Start Time"  Width="65" Margin="130,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="200,0,0,0" Width="130" 
+                                Content="{Binding  LightStartTime}" VerticalAlignment="Top" />
+
+                        <Label Content="End Time"  Width="65" Margin="130,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <Label  HorizontalAlignment="Left" Margin="200,25,0,0" Width="130" 
+                                Content="{Binding LightEndTime }" VerticalAlignment="Top" />
+                    </Grid>
+                </GroupBox>
+            </Grid>
+
+
+        </GroupBox>
+    </Grid>
+</UserControl>

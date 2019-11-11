@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="PakTrack.UI.ShockArea.ShockSRSGraphView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <!-- Loaded Windows Event -->
+    <i:Interaction.Triggers>
+        <i:EventTrigger>
+            <ei:CallMethodAction MethodName="Initialize" TargetObject="{Binding Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!-- /End loaded windows -->
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="TextBlock" Margin="20,0,0,0" FontSize="25" TextWrapping="Wrap"
+                           Text="{Binding Title}" Grid.Column="0" />
+
+                <Button  Command="{Binding GoBackCommand}" Grid.Column="1" HorizontalAlignment="Right"
+                        Style="{StaticResource PakTrackAccentedSquareButtonStyle}" VerticalAlignment="Center" Margin="0,0,15,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Width="15"
+                               Height="15"
+                               Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_arrow_left}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Margin="4 0 0 0"
+                               VerticalAlignment="Center"
+                               Text="Go Back" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </StackPanel>
+
+        <xctk:BusyIndicator IsBusy="{Binding IsBusy}" BusyContent="Plotting Chart..." Grid.Row="2">
+            <wpf:CartesianChart Series="{Binding SeriesCollection}" DisableAnimations="True" LegendLocation="Right">
+                <wpf:CartesianChart.AxisY>
+                    <wpf:Axis Title="G-Value" FontSize="18" />
+                </wpf:CartesianChart.AxisY>
+                <wpf:CartesianChart.AxisX>
+                    <wpf:Axis Title="Frequency (Hz)" FontSize="18" />
+                </wpf:CartesianChart.AxisX>
+            </wpf:CartesianChart>
+        </xctk:BusyIndicator>
+        
+    </Grid>
+</UserControl>

@@ -1,0 +1,91 @@
+﻿<controls:MetroWindow
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:local="clr-namespace:PakTrack.UI"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:utilities="clr-namespace:PakTrack.Utilities;assembly=PakTrack.Utilities"
+    x:Class="PakTrack.UI.Shell.Shell"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    Title="{Binding Title}" MinHeight="700" MinWidth="1200" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <!-- Loaded Windows Event -->
+    <i:Interaction.Triggers>
+        <i:EventTrigger>
+            <ei:CallMethodAction MethodName="Initialize" TargetObject="{Binding Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!-- /End loaded windows -->
+
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Button Command="{Binding NavigateUncnditionalCommand}" CommandParameter="{x:Static utilities:PakTrackConstant.MenuOptionSetting}">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20"
+                               Height="20"
+                               Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cog}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                               VerticalAlignment="Center"
+                               Text="Settings" />
+                </StackPanel>
+            </Button>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+
+    <Grid>
+        <!-- Grid Definition -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="22" />
+        </Grid.RowDefinitions>
+        <!-- /end grid definition -->
+        <!-- Logo -->
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <Image Source="../Resources/Images/logo.png" Height="50" Width="55" />
+        </StackPanel>
+        <!-- /End logo -->
+
+        <!-- Sidebar menu region -->
+        <ContentControl prism:RegionManager.RegionName="{x:Static local:ApplicationRegion.SideBarMenu}" Grid.Column="0"
+                        Grid.Row="1" />
+        <!-- /End sidebar menu -->
+       
+        <!-- Header menu region -->
+        <ContentControl prism:RegionManager.RegionName="{x:Static local:ApplicationRegion.HeaderMenu}" Grid.Row="0" Grid.Column="1" />
+        <!-- /End header menu region -->
+
+        <!--Main content area-->
+        <ContentControl prism:RegionManager.RegionName="{x:Static local:ApplicationRegion.MainRegion}" Grid.Column="1"
+                        Grid.Row="1" />
+        <!-- /End main content area-->
+        
+        <!-- Status bar -->
+        <StatusBar Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Bottom">
+            <StatusBarItem HorizontalAlignment="Left">
+                <TextBlock Text="{Binding Action}" FontSize="15" HorizontalAlignment="Center" />
+            </StatusBarItem>
+            <Separator />
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock Text="{Binding Status}" />
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Center">
+                <controls:MetroProgressBar IsIndeterminate="{Binding IsIndeterminate}" />
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock Text="{Binding BatteryLevel}" />
+            </StatusBarItem>
+        </StatusBar>
+        <!-- /End status bar -->
+
+    </Grid>
+</controls:MetroWindow>

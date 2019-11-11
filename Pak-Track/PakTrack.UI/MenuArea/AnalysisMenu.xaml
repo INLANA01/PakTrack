@@ -1,0 +1,81 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:utilities="clr-namespace:PakTrack.Utilities;assembly=PakTrack.Utilities"
+             xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" x:Class="PakTrack.UI.MenuArea.AnalysisMenu"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="230">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+    <StackPanel Width="200">
+        <!-- Dashboard Menu -->
+        <Button Command="{Binding NavigateCommand}" CommandParameter="{x:Static utilities:PakTrackConstant.MenuOptionDashboard}"
+                Content="{x:Static utilities:PakTrackConstant.MenuOptionDashboard}" />
+        <!-- Vibration Menu -->
+        <Button Content="Vibration" Command="{Binding NavigateCommand}"
+                CommandParameter="{x:Static utilities:PakTrackConstant.MenuOptionVibration}" />
+
+        <!-- Vibration Probability Menu -->
+        <Button Content="Vibration Probability Report" Command="{Binding NavigateCommand}"
+                CommandParameter="{x:Static utilities:PakTrackConstant.MenuOptionVibrationProbabilityReport}" Visibility="{Binding IsVibrationView, Converter={StaticResource BoolToVis}}" FontStyle="Italic" >
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+            </Button.Background>
+        </Button>
+
+        <!-- Vibration Consolidated Report -->
+        <Button Content="Consolidated Report" Command="{Binding NavigateCommand}"
+                CommandParameter="{x:Static utilities:PakTrackConstant.MenuOptionVibrationConsolidatedReport}" Height="20" Visibility="{Binding IsVibrationView, Converter={StaticResource BoolToVis}}" FontStyle="Italic">
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+            </Button.Background>
+        </Button>
+
+        <!-- Shcok Menu -->
+        <Button Content="Shock" Command="{Binding NavigateCommand}" 
+                CommandParameter="{x:Static utilities:PakTrackConstant.MenuOptionShock}" Custom:ControlsHelper.ContentCharacterCasing="Upper" />
+        <!-- Shock Probability Menu -->
+        <Button Content="Shock Probability Report" Command="{Binding NavigateCommand}"
+                CommandParameter="{x:Static utilities:PakTrackConstant.MenuOptionShockProbabilityReport}" Visibility="{Binding IsShockView, Converter={StaticResource BoolToVis}}" FontStyle="Italic" >
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+            </Button.Background>
+        </Button>
+
+
+        <!-- Orientation Menu -->
+        <Button Content="Orientation Report" Command="{Binding NavigateCommand}"
+                CommandParameter="{x:Static utilities:PakTrackConstant.MenuOptionOrientationHistogram}" Height="20" Visibility="{Binding IsShockView, Converter={StaticResource BoolToVis}}" FontStyle="Italic">
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+            </Button.Background>
+        </Button>
+
+        <!-- Orientation Menu -->
+        <Button Content="Drop Height Report" Command="{Binding NavigateCommand}"
+                CommandParameter="{x:Static utilities:PakTrackConstant.MenuOptionsDropHeightHistogram}" Height="20" Visibility="{Binding IsShockView, Converter={StaticResource BoolToVis}}" FontStyle="Italic">
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+            </Button.Background>
+        </Button>
+
+        <!-- Light Menu -->
+        <Button Content="Light" Command="{Binding NavigateCommand}"
+                CommandParameter="{x:Static utilities:PakTrackConstant.MenuOptionLight}" Height="20" />
+
+        <!-- Pressure Menu -->
+        <Button Content="Pressure" Command="{Binding NavigateCommand}"
+                CommandParameter="{x:Static utilities:PakTrackConstant.MenuOptionPressure}" Height="20" />
+
+        <!-- Humidity Menu -->
+        <Button Content="Humidity" Command="{Binding NavigateCommand}"
+                CommandParameter="{x:Static utilities:PakTrackConstant.MenuOptionHumidity}" Height="20" />
+
+        <!-- Temperature Menu -->
+        <Button Content="Temperature" Command="{Binding NavigateCommand}"
+                CommandParameter="{x:Static utilities:PakTrackConstant.MenuOptionTemperature}" Height="20" />
+    </StackPanel>
+</UserControl>

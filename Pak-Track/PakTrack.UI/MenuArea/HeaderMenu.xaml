@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="PakTrack.UI.MenuArea.HeaderMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PakTrack.UI.MenuArea"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:interactivity="http://prismlibrary.com/"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="1024">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+    <Grid>
+        <!-- Truck and Package selection -->
+        <ComboBox  HorizontalAlignment="Left" Margin="284,11,0,0" VerticalAlignment="Top"
+                  Width="170" ItemsSource="{Binding Trucks, Mode=TwoWay}" SelectedItem="{Binding SelectedTruck, Mode=TwoWay}" 
+                   ToolTip="Truck ID"  Visibility="{Binding Path=IsNotConfigPage, Converter={StaticResource BoolToVis}}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <interactivity:InvokeCommandAction Command="{Binding OnSelectedTruckChangedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
+        <!--RenderTransformOrigin="-0.539,-0.707"-->
+        <ComboBox  HorizontalAlignment="Left" Margin="584,11,0,0" VerticalAlignment="Top"
+                  Width="184"  ItemsSource="{Binding Packages}" SelectedItem="{Binding SelectedPackage, Mode=TwoWay}"  Visibility="{Binding Path=IsNotConfigPage, Converter={StaticResource BoolToVis}}">
+           <i:Interaction.Triggers>
+               <i:EventTrigger EventName="SelectionChanged">
+                    <interactivity:InvokeCommandAction Command="{Binding OnSelectedPackageChangedCommand}"/>
+               </i:EventTrigger>
+           </i:Interaction.Triggers>
+        </ComboBox>
+        <!--OnSelectedPackageChangedCommand-->
+        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="209,15,0,0" TextWrapping="Wrap"
+                   Text="Truck ID:" VerticalAlignment="Top" FontSize="{StaticResource WindowTitleFontSize}"
+                   FontWeight="Bold" Visibility="{Binding Path=IsNotConfigPage, Converter={StaticResource BoolToVis}}" />
+        <TextBlock HorizontalAlignment="Left" Margin="487,15,0,0" TextWrapping="Wrap"
+                   Text="Package ID: " VerticalAlignment="Top" FontSize="{StaticResource WindowTitleFontSize}"
+                   FontWeight="Bold" Visibility="{Binding Path=IsNotConfigPage, Converter={StaticResource BoolToVis}}" />
+        <TextBlock HorizontalAlignment="Left" Margin="10,5,0,0" TextWrapping="Wrap"
+                   Text="Pak-" VerticalAlignment="Top" Foreground="#FF42E69F" Style="{StaticResource PakTrackLogo}" />
+        <TextBlock  HorizontalAlignment="Left" Margin="64,5,0,0" TextWrapping="Wrap"
+                   Text="Track" VerticalAlignment="Top" Foreground="#FFFC9854" Style="{StaticResource PakTrackLogo}" />
+
+        <Button
+            Command="{Binding DeleteAllEventsCommand}"
+            HorizontalAlignment="Right"
+            Content="Delete All"
+            Margin="0 11 30 1"
+            Style="{StaticResource PakTrackAccentedSquareButtonStyle}"
+            Visibility="{Binding Path=CanDelete, Converter={StaticResource BoolToVis}}"
+            VerticalAlignment="Top" Width="80" />
+        <!-- /end truck and package selection -->
+    </Grid>
+</UserControl>

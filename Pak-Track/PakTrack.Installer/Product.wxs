@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define PakTrack.UI_TargetDir=$(var.PakTrack.UI.TargetDir)?>
+	<Product Id="*" Name="PakTrack" Language="1033" Version="1.0.0.0" Manufacturer="RIT" UpgradeCode="30d293c6-2eeb-4587-8ce8-3c6ab3d7086d">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+	  <UIRef Id="WixUI_Minimal" />
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+	  <MediaTemplate EmbedCab="yes"/>
+
+		<Feature Id="ProductFeature" Title="PakTrack" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="PakTrack Standalone" /> 
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+			<Component Id="PakTrack.UI.exe" Guid="6e86ebcc-8927-406a-92cc-e00523673167">
+			  <File Id="PakTrack.UI.exe" Name="PakTrack.UI.exe" Source="$(var.PakTrack.UI_TargetDir)PakTrack.UI.exe" />
+			</Component>
+			<Component Id="PakTrack.UI.exe.config" Guid="8d125771-4fe4-4dba-a337-28de5651ddce">
+			  <File Id="PakTrack.UI.exe.config" Name="PakTrack.UI.exe.config" Source="$(var.PakTrack.UI_TargetDir)PakTrack.UI.exe.config" />
+			</Component>
+			<Component Id="PakTrack.BL.dll" Guid="9056ead7-12c4-4131-b434-a6a8d3eff593">
+			  <File Id="PakTrack.BL.dll" Name="PakTrack.BL.dll" Source="$(var.PakTrack.UI_TargetDir)PakTrack.BL.dll" />
+			</Component>
+			<Component Id="PakTrack.Models.dll" Guid="dcd277f9-5a7a-4b98-b538-483013b1ac8a">
+			  <File Id="PakTrack.Models.dll" Name="PakTrack.Models.dll" Source="$(var.PakTrack.UI_TargetDir)PakTrack.Models.dll" />
+			</Component>
+			<Component Id="PakTrack.Utilities.dll" Guid="57dd0d25-814b-431b-bb87-cf7539679a25">
+			  <File Id="PakTrack.Utilities.dll" Name="PakTrack.Utilities.dll" Source="$(var.PakTrack.UI_TargetDir)PakTrack.Utilities.dll" />
+			</Component>
+			<Component Id="PakTrack.Core.dll" Guid="b343f7f8-f2f7-46ae-bc41-2cc9e693a7a0">
+			  <File Id="PakTrack.Core.dll" Name="PakTrack.Core.dll" Source="$(var.PakTrack.UI_TargetDir)PakTrack.Core.dll" />
+			</Component>
+			<Component Id="PakTrack.DAL.dll" Guid="e9954a9f-b0ca-4012-95af-2a2cb8c6f2ee">
+			  <File Id="PakTrack.DAL.dll" Name="PakTrack.DAL.dll" Source="$(var.PakTrack.UI_TargetDir)PakTrack.DAL.dll" />
+			</Component>
+			<Component Id="PakTrack.DTO.dll" Guid="9b6ecdb4-665f-48c0-8088-43af14072d89">
+			  <File Id="PakTrack.DTO.dll" Name="PakTrack.DTO.dll" Source="$(var.PakTrack.UI_TargetDir)PakTrack.DTO.dll" />
+			</Component>
+			<Component Id="LiteDB.dll" Guid="79fe747a-23a7-4529-a03d-29de95a9b837">
+			  <File Id="LiteDB.dll" Name="LiteDB.dll" Source="$(var.PakTrack.UI_TargetDir)LiteDB.dll" />
+			</Component>
+			<Component Id="LiveCharts.dll" Guid="d3bb4e20-48dd-4328-ae76-ea76e270bf9f">
+			  <File Id="LiveCharts.dll" Name="LiveCharts.dll" Source="$(var.PakTrack.UI_TargetDir)LiveCharts.dll" />
+			</Component>
+			<Component Id="Microsoft.Practices.Unity.dll" Guid="cec5f0fe-8119-41f2-b720-5272a4db4dd0">
+			  <File Id="Microsoft.Practices.Unity.dll" Name="Microsoft.Practices.Unity.dll" Source="$(var.PakTrack.UI_TargetDir)Microsoft.Practices.Unity.dll" />
+			</Component>
+			<Component Id="Microsoft.Practices.Unity.Configuration.dll" Guid="11f42412-9bf1-4e19-8cf1-6151e27419d1">
+			  <File Id="Microsoft.Practices.Unity.Configuration.dll" Name="Microsoft.Practices.Unity.Configuration.dll" Source="$(var.PakTrack.UI_TargetDir)Microsoft.Practices.Unity.Configuration.dll" />
+			</Component>
+			<Component Id="Microsoft.Practices.Unity.RegistrationByConvention.dll" Guid="2a20533d-0439-4980-8d4c-da12957cd167">
+			  <File Id="Microsoft.Practices.Unity.RegistrationByConvention.dll" Name="Microsoft.Practices.Unity.RegistrationByConvention.dll" Source="$(var.PakTrack.UI_TargetDir)Microsoft.Practices.Unity.RegistrationByConvention.dll" />
+			</Component>
+			<Component Id="OxyPlot.dll" Guid="23ac9e54-3c06-4065-a0cd-9490aae47708">
+			  <File Id="OxyPlot.dll" Name="OxyPlot.dll" Source="$(var.PakTrack.UI_TargetDir)OxyPlot.dll" />
+			</Component>
+			<Component Id="OxyPlot.Wpf.dll" Guid="0da4da75-f33e-4d34-8d37-94e1790cbd8d">
+			  <File Id="OxyPlot.Wpf.dll" Name="OxyPlot.Wpf.dll" Source="$(var.PakTrack.UI_TargetDir)OxyPlot.Wpf.dll" />
+			</Component>
+			<Component Id="Prism.dll" Guid="1374f98b-2f96-40c1-a0fb-a0ce74f9b0b7">
+			  <File Id="Prism.dll" Name="Prism.dll" Source="$(var.PakTrack.UI_TargetDir)Prism.dll" />
+			</Component>
+			<Component Id="Prism.Unity.Wpf.dll" Guid="8f45af44-2e78-402d-a9f3-099ac4383957">
+			  <File Id="Prism.Unity.Wpf.dll" Name="Prism.Unity.Wpf.dll" Source="$(var.PakTrack.UI_TargetDir)Prism.Unity.Wpf.dll" />
+			</Component>
+			<Component Id="Prism.Wpf.dll" Guid="0ebd80cb-675c-4ffd-a1d8-b8061401fc44">
+			  <File Id="Prism.Wpf.dll" Name="Prism.Wpf.dll" Source="$(var.PakTrack.UI_TargetDir)Prism.Wpf.dll" />
+			</Component>
+			<Component Id="System.Windows.Interactivity.dll" Guid="b7d7573f-59e7-45de-99d9-e88361f73cbf">
+			  <File Id="System.Windows.Interactivity.dll" Name="System.Windows.Interactivity.dll" Source="$(var.PakTrack.UI_TargetDir)System.Windows.Interactivity.dll" />
+			</Component>
+			<Component Id="Xceed.Wpf.AvalonDock.dll" Guid="65697c96-26ca-4c00-95dd-730224c9034f">
+			  <File Id="Xceed.Wpf.AvalonDock.dll" Name="Xceed.Wpf.AvalonDock.dll" Source="$(var.PakTrack.UI_TargetDir)Xceed.Wpf.AvalonDock.dll" />
+			</Component>
+			<Component Id="Xceed.Wpf.Toolkit.dll" Guid="f8a6a549-d9b0-4637-82cc-3a3b0b173f7f">
+			  <File Id="Xceed.Wpf.Toolkit.dll" Name="Xceed.Wpf.Toolkit.dll" Source="$(var.PakTrack.UI_TargetDir)Xceed.Wpf.Toolkit.dll" />
+			</Component>
+			<Component Id="Xceed.Wpf.DataGrid.dll" Guid="61c59e52-4689-44e3-afa4-dd9a3c5749f2">
+			  <File Id="Xceed.Wpf.DataGrid.dll" Name="Xceed.Wpf.DataGrid.dll" Source="$(var.PakTrack.UI_TargetDir)Xceed.Wpf.DataGrid.dll" />
+			</Component>
+			<Component Id="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Guid="8c5e0390-3a82-47be-9686-35b4e71ff4b7">
+			  <File Id="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Name="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Source="$(var.PakTrack.UI_TargetDir)Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+			</Component>
+			<Component Id="Xceed.Wpf.AvalonDock.Themes.Metro.dll" Guid="8e9ae8bf-39a4-4ba3-82c4-14402a97aba2">
+			  <File Id="Xceed.Wpf.AvalonDock.Themes.Metro.dll" Name="Xceed.Wpf.AvalonDock.Themes.Metro.dll" Source="$(var.PakTrack.UI_TargetDir)Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+			</Component>
+			<Component Id="Xceed.Wpf.AvalonDock.Themes.Aero.dll" Guid="caeebd80-da2b-4224-b478-6842c42a45b1">
+			  <File Id="Xceed.Wpf.AvalonDock.Themes.Aero.dll" Name="Xceed.Wpf.AvalonDock.Themes.Aero.dll" Source="$(var.PakTrack.UI_TargetDir)Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+			</Component>
+			<Component Id="LiveCharts.Wpf.dll" Guid="88700b4c-c71e-49ed-9a6b-15446975aab0">
+			  <File Id="LiveCharts.Wpf.dll" Name="LiveCharts.Wpf.dll" Source="$(var.PakTrack.UI_TargetDir)LiveCharts.Wpf.dll" />
+			</Component>
+			<Component Id="MahApps.Metro.dll" Guid="bcfcdc6a-a65c-41ed-b317-411739944f2d">
+			  <File Id="MahApps.Metro.dll" Name="MahApps.Metro.dll" Source="$(var.PakTrack.UI_TargetDir)MahApps.Metro.dll" />
+			</Component>
+			<Component Id="MathNet.Numerics.dll" Guid="341a0dd7-2151-467f-8fa5-c6e3f4d8fc80">
+			  <File Id="MathNet.Numerics.dll" Name="MathNet.Numerics.dll" Source="$(var.PakTrack.UI_TargetDir)MathNet.Numerics.dll" />
+			</Component>
+			<Component Id="Microsoft.Expression.Interactions.dll" Guid="74c5b6ba-8b49-424e-b84a-f3c0a70525df">
+			  <File Id="Microsoft.Expression.Interactions.dll" Name="Microsoft.Expression.Interactions.dll" Source="$(var.PakTrack.UI_TargetDir)Microsoft.Expression.Interactions.dll" />
+			</Component>
+			<Component Id="Microsoft.Practices.ServiceLocation.dll" Guid="4c22baea-0e51-45db-aac5-0541265a26ec">
+			  <File Id="Microsoft.Practices.ServiceLocation.dll" Name="Microsoft.Practices.ServiceLocation.dll" Source="$(var.PakTrack.UI_TargetDir)Microsoft.Practices.ServiceLocation.dll" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

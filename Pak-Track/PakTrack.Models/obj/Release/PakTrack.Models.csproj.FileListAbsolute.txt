@@ -1,0 +1,12 @@
+C:\RA\Pak-Track\PakTrack.Models\bin\Release\PakTrack.Models.dll
+C:\RA\Pak-Track\PakTrack.Models\bin\Release\PakTrack.Models.pdb
+C:\RA\Pak-Track\PakTrack.Models\bin\Release\LiteDB.dll
+C:\RA\Pak-Track\PakTrack.Models\bin\Release\PakTrack.Utilities.dll
+C:\RA\Pak-Track\PakTrack.Models\bin\Release\MathNet.Numerics.dll
+C:\RA\Pak-Track\PakTrack.Models\bin\Release\PakTrack.Utilities.pdb
+C:\RA\Pak-Track\PakTrack.Models\bin\Release\MathNet.Numerics.xml
+C:\RA\Pak-Track\PakTrack.Models\obj\Release\PakTrack.Models.csprojAssemblyReference.cache
+C:\RA\Pak-Track\PakTrack.Models\obj\Release\PakTrack.Models.csproj.CoreCompileInputs.cache
+C:\RA\Pak-Track\PakTrack.Models\obj\Release\PakTrack.Models.csproj.CopyComplete
+C:\RA\Pak-Track\PakTrack.Models\obj\Release\PakTrack.Models.dll
+C:\RA\Pak-Track\PakTrack.Models\obj\Release\PakTrack.Models.pdb

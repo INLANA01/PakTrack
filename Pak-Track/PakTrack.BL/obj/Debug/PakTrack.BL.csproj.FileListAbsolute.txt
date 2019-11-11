@@ -1,0 +1,14 @@
+C:\RA\Pak-Track\PakTrack.BL\bin\Debug\PakTrack.BL.dll
+C:\RA\Pak-Track\PakTrack.BL\bin\Debug\PakTrack.BL.pdb
+C:\RA\Pak-Track\PakTrack.BL\bin\Debug\LiteDB.dll
+C:\RA\Pak-Track\PakTrack.BL\bin\Debug\PakTrack.Models.dll
+C:\RA\Pak-Track\PakTrack.BL\bin\Debug\PakTrack.Utilities.dll
+C:\RA\Pak-Track\PakTrack.BL\bin\Debug\MathNet.Numerics.dll
+C:\RA\Pak-Track\PakTrack.BL\bin\Debug\PakTrack.Models.pdb
+C:\RA\Pak-Track\PakTrack.BL\bin\Debug\PakTrack.Utilities.pdb
+C:\RA\Pak-Track\PakTrack.BL\bin\Debug\MathNet.Numerics.xml
+C:\RA\Pak-Track\PakTrack.BL\obj\Debug\PakTrack.BL.csprojAssemblyReference.cache
+C:\RA\Pak-Track\PakTrack.BL\obj\Debug\PakTrack.BL.csproj.CoreCompileInputs.cache
+C:\RA\Pak-Track\PakTrack.BL\obj\Debug\PakTrack.BL.csproj.CopyComplete
+C:\RA\Pak-Track\PakTrack.BL\obj\Debug\PakTrack.BL.dll
+C:\RA\Pak-Track\PakTrack.BL\obj\Debug\PakTrack.BL.pdb

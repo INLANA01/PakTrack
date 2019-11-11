@@ -1,0 +1,8 @@
+C:\RA\Pak-Track\PakTrack.DTO\bin\Release\PakTrack.DTO.dll
+C:\RA\Pak-Track\PakTrack.DTO\bin\Release\PakTrack.DTO.pdb
+C:\RA\Pak-Track\PakTrack.DTO\bin\Release\LiteDB.dll
+C:\RA\Pak-Track\PakTrack.DTO\obj\Release\PakTrack.DTO.csproj.CoreCompileInputs.cache
+C:\RA\Pak-Track\PakTrack.DTO\obj\Release\PakTrack.DTO.csproj.CopyComplete
+C:\RA\Pak-Track\PakTrack.DTO\obj\Release\PakTrack.DTO.dll
+C:\RA\Pak-Track\PakTrack.DTO\obj\Release\PakTrack.DTO.pdb
+C:\RA\Pak-Track\PakTrack.DTO\obj\Release\PakTrack.DTO.csprojAssemblyReference.cache

@@ -1,0 +1,150 @@
+﻿<UserControl x:Class="PakTrack.UI.VibrationArea.VibrationCustomConsolidatedReportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"           
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+             xmlns:local="clr-namespace:PakTrack.UI.VibrationArea"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="800" Height="600" Width="870">
+    <Grid>
+        <RadioButton HorizontalAlignment="Center" Margin="0,70,100,0" Content="GValue" VerticalAlignment="Top" IsChecked="{Binding IsGValue, Mode=TwoWay}"/>
+        <RadioButton HorizontalAlignment="Center" Margin="100,70,0,0"  Content="TimeStamp" VerticalAlignment="Top" IsChecked="{Binding IsTimeStamp, Mode=TwoWay}" />
+        <GroupBox x:Name="DefaultCongif" Header="Custom Consolidated Report" HorizontalAlignment="Left" Margin="25,100,0,0" VerticalAlignment="Top">
+            <Grid>
+                <GroupBox  Header="Time Stamp" HorizontalAlignment="Left" Margin="0,1,0,0" VerticalAlignment="Top" Height="120" Width="800">
+                    <Grid  IsEnabled="{Binding IsTimeStamp}">
+                        
+
+                        <Label Content="Start" Margin="40,3,0,0"  Width="35" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <xctk:IntegerUpDown  HorizontalAlignment="Left" Margin="090,5,0,0"  Width="40" 
+                                             VerticalAlignment="Top" FormatString="N0"
+                                             Value="{Binding StartMonth, Mode=TwoWay}" Increment="1" Maximum="12" Minimum="1"/>
+                        <TextBlock  HorizontalAlignment="Left" Margin="130,5,0,0" TextWrapping="Wrap" Width="40" 
+                                    Text="Month" VerticalAlignment="Top" />
+
+                        <xctk:IntegerUpDown FormatString="N0" HorizontalAlignment="Left" Margin="175,5,0,0"  Width="40" Increment="1" Maximum="31" Minimum="1"
+                                             Value="{Binding StartDay, Mode=TwoWay}" VerticalAlignment="Top"  />
+                        <TextBlock  HorizontalAlignment="Left" Margin="220,05,0,0" TextWrapping="Wrap" Width="30" 
+                                    Text="Day" VerticalAlignment="Top" />
+
+                        <xctk:IntegerUpDown FormatString="N0" HorizontalAlignment="Left" Margin="260,5,0,0"   Width="60" Increment="1" Minimum="2000"
+                                            Value="{Binding StartYear, Mode=TwoWay}" VerticalAlignment="Top"  />
+                        <TextBlock  HorizontalAlignment="Left" Margin="325,5,0,0" TextWrapping="Wrap" Width="30" 
+                                    Text="Year" VerticalAlignment="Top" />
+
+                        <xctk:IntegerUpDown FormatString="N0" HorizontalAlignment="Left" Margin="355,5,0,0"  Width="40" Increment="1" Maximum="59" Minimum="0"
+                                            Value="{Binding StartHour, Mode=TwoWay}" VerticalAlignment="Top"  />
+                        <TextBlock  HorizontalAlignment="Left" Margin="400,5,0,0" TextWrapping="Wrap" Width="10" 
+                                    Text="h" VerticalAlignment="Top" />
+                        <xctk:IntegerUpDown FormatString="N0" HorizontalAlignment="Left" Margin="412,5,0,0"  Width="40"  Minimum="0" Maximum="59"
+                                 Value="{Binding StartMin, Mode=TwoWay}" VerticalAlignment="Top"  />
+                        <TextBlock  HorizontalAlignment="Left" Margin="455,5,0,0" TextWrapping="Wrap" Width="15" 
+                                    Text="m" VerticalAlignment="Top" />
+
+
+                        <Label Content="End" Margin="040,53,0,0"  Width="35" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+
+                        <xctk:IntegerUpDown  HorizontalAlignment="Left" Margin="090,50,0,0"  Width="40" 
+                                             VerticalAlignment="Top" FormatString="N0"
+                                             Value="{Binding EndMonth, Mode=TwoWay}" Increment="1" Maximum="12" Minimum="1"/>
+                        <TextBlock  HorizontalAlignment="Left" Margin="130,50,0,0" TextWrapping="Wrap" Width="40" 
+                                    Text="Month" VerticalAlignment="Top" />
+
+                        <xctk:IntegerUpDown FormatString="N0" HorizontalAlignment="Left" Margin="175,50,0,0"  Width="40" Increment="1" Maximum="31" Minimum="1"
+                                             Value="{Binding EndDay, Mode=TwoWay}" VerticalAlignment="Top"  />
+                        <TextBlock  HorizontalAlignment="Left" Margin="220,50,0,0" TextWrapping="Wrap" Width="30" 
+                                    Text="Day" VerticalAlignment="Top" />
+
+                        <xctk:IntegerUpDown FormatString="N0" HorizontalAlignment="Left" Margin="260,50,0,0"   Width="60" Increment="1" Minimum="2000"
+                                            Value="{Binding EndYear, Mode=TwoWay}" VerticalAlignment="Top"  />
+                        <TextBlock  HorizontalAlignment="Left" Margin="325,50,0,0" TextWrapping="Wrap" Width="30" 
+                                    Text="Year" VerticalAlignment="Top" />
+
+                        <xctk:IntegerUpDown FormatString="N0" HorizontalAlignment="Left" Margin="355,50,0,0"  Width="40" Increment="1" Maximum="59" Minimum="0"
+                                            Value="{Binding EndHour, Mode=TwoWay}" VerticalAlignment="Top"  />
+                        <TextBlock  HorizontalAlignment="Left" Margin="400,50,0,0" TextWrapping="Wrap" Width="10" 
+                                    Text="h" VerticalAlignment="Top" />
+                        <xctk:IntegerUpDown FormatString="N0" HorizontalAlignment="Left" Margin="412,50,0,0"  Width="40"  Minimum="0" Maximum="59"
+                                 Value="{Binding EndMin, Mode=TwoWay}" VerticalAlignment="Top"  />
+                        <TextBlock  HorizontalAlignment="Left" Margin="455,50,0,0" TextWrapping="Wrap" Width="15" 
+                                    Text="m" VerticalAlignment="Top" />
+                    
+
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox  Header="X-Axis" HorizontalAlignment="Left" Margin="0,121,0,0" VerticalAlignment="Top" Height="120" Width="260" >
+                    <Grid IsEnabled="{Binding IsGValue}">
+                        <Label Content="Min G-Value" Margin="0,5,0,0"  Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+                        <TextBox HorizontalAlignment="Left" Margin="100,5,0,0" TextWrapping="Wrap" Width="130"
+                                 Text="{Binding MinXGValue}" VerticalAlignment="Top" FontSize="{StaticResource WindowTitleFontSize}"
+                                 FontWeight="Bold" PreviewTextInput="NumberValidationTextBox"/>
+
+                        <Label Content="Max G-Value" Margin="0,35,0,0"  Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+                        <TextBox HorizontalAlignment="Left" Margin="100,35,0,0" TextWrapping="Wrap" Width="130"
+                                 Text="{Binding MaxXGValue}" VerticalAlignment="Top" FontSize="{StaticResource WindowTitleFontSize}"
+                                 FontWeight="Bold" PreviewTextInput="NumberValidationTextBox"/>
+
+                       
+
+                    </Grid>
+                </GroupBox>
+
+
+                <GroupBox  Header="Y-Axis" HorizontalAlignment="Left" Margin="270,121,0,0" VerticalAlignment="Top" Height="120" Width="260" >
+                    <Grid IsEnabled="{Binding IsGValue}">
+                        <Label Content="Min G-Value" Margin="0,5,0,0"  Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+                        <TextBox HorizontalAlignment="Left" Margin="100,5,0,0" TextWrapping="Wrap" Width="130"
+                                 Text="{Binding MinYGValue}" VerticalAlignment="Top" FontSize="{StaticResource WindowTitleFontSize}"
+                                 FontWeight="Bold" PreviewTextInput="NumberValidationTextBox"/>
+
+                        <Label Content="Max G-Value" Margin="0,35,0,0"  Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+                        <TextBox HorizontalAlignment="Left" Margin="100,35,0,0" TextWrapping="Wrap" Width="130"
+                                 Text="{Binding MaxYGValue}" VerticalAlignment="Top" FontSize="{StaticResource WindowTitleFontSize}"
+                                 FontWeight="Bold" PreviewTextInput="NumberValidationTextBox"/>
+
+                        
+
+                    </Grid>
+                </GroupBox>
+                <GroupBox  Header="Z-Axis" HorizontalAlignment="Left" Margin="540,121,0,0" VerticalAlignment="Top" Height="120" Width="260">
+                    <Grid IsEnabled="{Binding IsGValue}">
+                        <Label Content="Min G-Value" Margin="0,5,0,0"  Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+                        <TextBox HorizontalAlignment="Left" Margin="100,5,0,0" TextWrapping="Wrap" Width="130"
+                                 Text="{Binding MinZGValue}" VerticalAlignment="Top" FontSize="{StaticResource WindowTitleFontSize}"
+                                 FontWeight="Bold" PreviewTextInput="NumberValidationTextBox"/>
+
+                        <Label Content="Max G-Value" Margin="0,35,0,0"  Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" ></Label>
+                        <TextBox HorizontalAlignment="Left" Margin="100,35,0,0" TextWrapping="Wrap" Width="130"
+                                 Text="{Binding MaxZGValue}" VerticalAlignment="Top" FontSize="{StaticResource WindowTitleFontSize}"
+                                 FontWeight="Bold" PreviewTextInput="NumberValidationTextBox"/>
+                    </Grid>
+                </GroupBox>
+                
+            </Grid>
+        </GroupBox>
+        <Button
+            Command="{Binding ApplyCustomFilterCommand}"
+            Content="Apply Filters"
+            Style="{StaticResource PakTrackAccentedSquareButtonStyle}"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Margin="0, 0, 150, 20"
+            Grid.Row="0"  Width="120" />
+
+        <Button
+            Command="{Binding CommandCancel}"
+            Content="Cancel"
+            Style="{StaticResource PakTrackAccentedSquareButtonStyle}"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Margin="0, 0, 20, 20"
+            Grid.Row="0"  Width="120" />
+
+        
+    </Grid>
+</UserControl>
